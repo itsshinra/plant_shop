@@ -7,6 +7,12 @@ class MainController extends GetxController {
   final box = GetStorage();
   final apiService = ApiService();
 
+  @override
+  void onInit() {
+    logout();
+    super.onInit();
+  }
+
   void logout() async {
     await apiService.logout();
     box.remove("token");

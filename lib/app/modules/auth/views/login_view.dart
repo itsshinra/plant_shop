@@ -64,6 +64,10 @@ class LoginView extends GetView<LoginController> {
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: const BorderSide(color: mainColor),
                               ),
+                              errorText:
+                                  controller.emailErrorMessage.value.isEmpty
+                                      ? null
+                                      : controller.emailErrorMessage.value,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -105,6 +109,10 @@ class LoginView extends GetView<LoginController> {
                                 borderRadius: BorderRadius.circular(20),
                                 borderSide: const BorderSide(color: mainColor),
                               ),
+                              errorText:
+                                  controller.passwordErrorMessage.value.isEmpty
+                                      ? null
+                                      : controller.passwordErrorMessage.value,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -113,6 +121,7 @@ class LoginView extends GetView<LoginController> {
                               if (value.length < 6) {
                                 return "Password must be at least 6 characters";
                               }
+
                               return null;
                             },
                           ),
@@ -162,7 +171,7 @@ class LoginView extends GetView<LoginController> {
                       const Text("Don't have an account?"),
                       TextButton(
                         onPressed: () {
-                          Get.to(const SignUpView());
+                          Get.to(SignUpView());
                         },
                         child: const Text(
                           'Signup',

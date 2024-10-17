@@ -9,25 +9,36 @@ class LoginController extends GetxController {
   final apiService = ApiService();
   final box = GetStorage();
 
+  var emailErrorMessage = ''.obs;
+  var passwordErrorMessage = ''.obs;
+
   void login({required String email, required String password}) async {
     isLoading.value = true;
+
+    emailErrorMessage.value = '';
+    passwordErrorMessage.value = '';
 
     try {
       final response = await apiService.login(email: email, password: password);
       if (response.token != null) {
         box.write("token", response.token);
-        Get.snackbar('Success', "User logged in successfully",
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white);
+        Get.snackbar(
+          'Success',
+          "User logged in successfully",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
         Get.offAll(() => const HomeScreen());
       }
     } catch (e) {
       isLoading.value = false;
+      emailErrorMessage.value = 'Invalid email or password';
+      passwordErrorMessage.value = 'Invalid email or password';
 
       Get.snackbar(
         'Error',
-        e.toString(),
+        'Invalid email or password',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
         colorText: Colors.white,

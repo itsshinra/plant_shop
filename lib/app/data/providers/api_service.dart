@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:plan_shop/app/data/models/login_model.dart';
@@ -59,6 +61,46 @@ class ApiService {
         return true;
       }
       throw Exception("Falied to Logout");
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // Register
+  Future<bool> register({
+    required String name,
+    required String email,
+    required String password,
+    File? image,
+  }) async {
+    try {
+      var formData = FormData.fromMap({
+        'email': email,
+        'name': name,
+        'password': password,
+        'image':
+            image != null ? await MultipartFile.fromFile(image.path) : null,
+      });
+      final response = await dio.post(
+        "$baseUrl/register",
+        data: formData,
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+          },
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else if (response.statusCode == 400) {
+        throw Exception('Email already exists');
+      } else {
+        throw Exception('Failed to register');
+      }
     } catch (e) {
       rethrow;
     }
