@@ -171,7 +171,7 @@ class LoginView extends GetView<LoginController> {
                       const Text("Don't have an account?"),
                       TextButton(
                         onPressed: () {
-                          Get.to(SignUpView());
+                          Get.to(() => SignUpView());
                         },
                         child: const Text(
                           'Signup',

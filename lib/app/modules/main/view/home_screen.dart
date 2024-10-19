@@ -1,11 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/modules/main/view/detail_screen.dart';
 import 'package:plan_shop/app/modules/post/views/post_screen.dart';
+import 'package:plan_shop/app/modules/profile/controllers/profile_controller.dart';
 import 'package:plan_shop/app/modules/profile/views/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -223,13 +225,21 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ProfileScreen()));
           },
-          child: const Padding(
-            padding: EdgeInsets.only(right: 32.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.green,
-              backgroundImage: NetworkImage(
-                  'https://c8.alamy.com/zooms/9/d4c59d90389444e3b1166312d2f7fa51/p9mywr.jpg'),
-            ),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 32.0),
+            child: GetBuilder<ProfileController>(
+                init: ProfileController(),
+                builder: (controller) {
+                  if (controller.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  final user = controller.user.user;
+                  return CircleAvatar(
+                    backgroundColor: Colors.green,
+                    backgroundImage: NetworkImage(
+                        'http://10.0.2.2:8000/profiles/${user!.profileImage!}'),
+                  );
+                }),
           ),
         ),
       ],

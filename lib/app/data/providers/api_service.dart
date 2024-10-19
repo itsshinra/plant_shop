@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:plan_shop/app/data/models/login_model.dart';
 
+import '../models/user_model.dart';
+
 class ApiService {
   final dio = Dio();
   final box = GetStorage();
@@ -56,7 +58,6 @@ class ApiService {
           },
         ),
       );
-      print('statuscode: ${response.statusCode}');
       if (response.statusCode == 200) {
         return true;
       }
@@ -101,6 +102,63 @@ class ApiService {
       } else {
         throw Exception('Failed to register');
       }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // Delete
+  Future<bool> delete() async {
+    try {
+      final response = await dio.delete(
+        '$baseUrl/delete',
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ${box.read('token')}',
+          },
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        return Future.delayed(const Duration(seconds: 2), () => true);
+      } else if (response.statusCode == 404) {
+        throw Exception("User not found");
+      } else {
+        throw Exception("Failded to delete user");
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // get current user
+  Future<UserResModel> getCurrentUser() async {
+    try {
+      final response = await dio.post(
+        "$baseUrl/me",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ${box.read('token')}',
+          },
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return UserResModel.fromJson(response.data);
+      } else if (response.statusCode == 401) {
+        throw Exception("Unauthorized");
+      }
+
+      throw Exception("Failed to get user");
     } catch (e) {
       rethrow;
     }
