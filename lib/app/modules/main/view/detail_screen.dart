@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/data/models/post_model.dart';
+import 'package:plan_shop/app/modules/cart/views/cart_view.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key, this.postId, this.post});
@@ -194,7 +195,9 @@ class DetailScreen extends StatelessWidget {
           child: const Icon(Icons.arrow_back_rounded),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => const CartView());
+          },
           icon: const HugeIcon(
             icon: HugeIcons.strokeRoundedShoppingBagFavorite,
             color: Colors.black,

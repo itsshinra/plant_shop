@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:plan_shop/app/constants/colors.dart';
+import 'package:plan_shop/app/modules/cart/views/cart_view.dart';
 import 'package:plan_shop/app/modules/main/view/detail_screen.dart';
 import 'package:plan_shop/app/modules/post/controllers/post_controller.dart';
 import 'package:plan_shop/app/modules/post/views/post_screen.dart';
@@ -28,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
         init: PostController(),
         builder: (controller) {
           if (controller.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(color: mainColor));
           }
           return RefreshIndicator(
             backgroundColor: mainColor,
@@ -217,6 +219,18 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.grey.shade200,
       surfaceTintColor: Colors.grey.shade200,
       centerTitle: true,
+      leadingWidth: 80,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 32),
+        child: IconButton(
+            onPressed: () {
+              Get.to(() => const CartView());
+            },
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedShoppingBagFavorite,
+              color: Colors.black,
+            )),
+      ),
       title: const Text(
         "Search Product",
         style: TextStyle(fontWeight: FontWeight.w500),
@@ -224,8 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: [
         GestureDetector(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProfileScreen()));
+            Get.to(() => const ProfileScreen());
           },
           child: Padding(
             padding: const EdgeInsets.only(right: 32.0),
@@ -233,7 +246,8 @@ class _HomeScreenState extends State<HomeScreen> {
               init: ProfileController(),
               builder: (controller) {
                 if (controller.isLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                      child: CircularProgressIndicator(color: mainColor));
                 }
                 final user = controller.user.user;
                 return user != null && user.profileImage != null

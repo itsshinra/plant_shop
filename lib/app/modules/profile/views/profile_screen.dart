@@ -17,7 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkBackground,
+      backgroundColor: lightBackground,
       body: GetBuilder<ProfileController>(
         init: ProfileController(),
         builder: (profileController) {
@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       )
                     : CircleAvatar(
-                        radius: 83,
+                        radius: 84,
                         backgroundColor: mainColor,
                         child: CircleAvatar(
                           radius: 80,
@@ -56,9 +56,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Text(
                   '${user!.name}',
                   style: const TextStyle(
-                    fontSize: 26,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 24,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 Padding(
@@ -69,11 +69,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: "Bio...",
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: mainColor),
                             enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide: BorderSide(color: mainColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: mainColor, width: 3),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -96,11 +102,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           borderRadius: BorderRadius.circular(18.0),
                           side: const BorderSide(
                             color: mainColor,
+                            width: 2,
                           ),
                         ),
                       ),
                       backgroundColor:
-                          const WidgetStatePropertyAll(darkBackground),
+                          const WidgetStatePropertyAll(lightContainer),
                     ),
                     onPressed: () {
                       _showLogoutDialog(context);
@@ -133,11 +140,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                          side: const BorderSide(color: Colors.red),
+                          side: const BorderSide(
+                            color: Colors.red,
+                            width: 2,
+                          ),
                         ),
                       ),
-                      backgroundColor: const WidgetStatePropertyAll(
-                          Color.fromARGB(255, 20, 23, 26)),
+                      backgroundColor:
+                          const WidgetStatePropertyAll(lightContainer),
                     ),
                     onPressed: () {
                       _showDeleteDialog(context);
@@ -261,13 +271,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const Text(
           'Profile',
           style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         TextButton(
           onPressed: () {},
           child: const Text(
             'Save',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black, fontSize: 16),
           ),
         )
       ],
