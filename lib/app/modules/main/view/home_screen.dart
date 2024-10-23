@@ -6,6 +6,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/modules/main/view/detail_screen.dart';
+import 'package:plan_shop/app/modules/post/controllers/post_controller.dart';
 import 'package:plan_shop/app/modules/post/views/post_screen.dart';
 import 'package:plan_shop/app/modules/profile/controllers/profile_controller.dart';
 import 'package:plan_shop/app/modules/profile/views/profile_screen.dart';
@@ -18,131 +19,132 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _plants = [
-    "https://www.concordamericanflagpole.com/wp-content/uploads/revslider/basic-hero-collection/1-plant.png",
-    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cbf84343-a8e7-43dd-93c9-de1278dca06c/d671ksv-77ff41e2-33d9-4436-bc0f-9862c35a4122.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2NiZjg0MzQzLWE4ZTctNDNkZC05M2M5LWRlMTI3OGRjYTA2Y1wvZDY3MWtzdi03N2ZmNDFlMi0zM2Q5LTQ0MzYtYmMwZi05ODYyYzM1YTQxMjIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.D-Od29TVmVk2rVNpsY5gAQks3TGJMk2MwAMs3z053JE",
-    "https://i.pinimg.com/originals/6f/48/a3/6f48a3aeaff9ce0d82ef7ec3646031f1.png",
-    "https://purepng.com/public/uploads/large/plant-1hn.png",
-    "https://clipart-library.com/images_k/transparent-plants/transparent-plants-14.png",
-    "https://www.concordamericanflagpole.com/wp-content/uploads/revslider/basic-hero-collection/1-plant.png",
-    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cbf84343-a8e7-43dd-93c9-de1278dca06c/d671ksv-77ff41e2-33d9-4436-bc0f-9862c35a4122.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2NiZjg0MzQzLWE4ZTctNDNkZC05M2M5LWRlMTI3OGRjYTA2Y1wvZDY3MWtzdi03N2ZmNDFlMi0zM2Q5LTQ0MzYtYmMwZi05ODYyYzM1YTQxMjIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.D-Od29TVmVk2rVNpsY5gAQks3TGJMk2MwAMs3z053JE",
-    "https://i.pinimg.com/originals/6f/48/a3/6f48a3aeaff9ce0d82ef7ec3646031f1.png",
-    "https://purepng.com/public/uploads/large/plant-1hn.png",
-    "https://clipart-library.com/images_k/transparent-plants/transparent-plants-14.png",
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: lightBackground,
       appBar: _appBar(),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          const SizedBox(height: 50),
-          _searchField(),
-          const SizedBox(height: 20),
-          _plantGrid(),
-        ],
+      body: GetBuilder<PostController>(
+        init: PostController(),
+        builder: (controller) {
+          if (controller.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return RefreshIndicator(
+            backgroundColor: mainColor,
+            color: Colors.white,
+            onRefresh: () {
+              return controller.getPosts();
+            },
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                const SizedBox(height: 50),
+                _searchField(),
+                const SizedBox(height: 20),
+                MasonryGridView.count(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  itemCount: controller.posts.posts?.data?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    final plant = controller.posts.posts!.data![index];
+                    return GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          () => DetailScreen(
+                            postId: plant.id.toString(),
+                            post: plant,
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 16),
+                        width: 170,
+                        decoration: BoxDecoration(
+                          color: lightContainer,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Image.network(
+                                plant.image != null
+                                    ? "http://10.0.2.2:8000/posts/${plant.image}"
+                                    : 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  '${plant.title}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  '${plant.description}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 12,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '${plant.price}\$',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    log('add to favorites');
+                                  },
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.black,
+                                    ),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(5),
+                                      child: HugeIcon(
+                                        icon: HugeIcons.strokeRoundedHeartAdd,
+                                        size: 20,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          );
+        },
       ),
       floatingActionButton: _circleButton(),
-    );
-  }
-
-  Widget _plantGrid() {
-    return MasonryGridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      //   crossAxisCount: 2,
-      //   childAspectRatio: 0.6,
-      // ),
-      crossAxisCount: 2,
-      itemCount: _plants.length,
-      itemBuilder: (context, index) {
-        var plant = _plants[index];
-        return _plantItem(plant);
-      },
-    );
-  }
-
-  Widget _plantItem(String plant) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const DetailScreen()));
-      },
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        width: 170,
-        decoration: BoxDecoration(
-          color: lightContainer,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Image.network(
-                plant,
-                fit: BoxFit.contain,
-              ),
-            ),
-            const Column(
-              children: [
-                Text(
-                  'Plant',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  'add lift to uour garden',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  '10,99\$',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    log('add to favorites');
-                  },
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(5),
-                      child: HugeIcon(
-                        icon: HugeIcons.strokeRoundedHeartAdd,
-                        size: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -228,18 +230,24 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Padding(
             padding: const EdgeInsets.only(right: 32.0),
             child: GetBuilder<ProfileController>(
-                init: ProfileController(),
-                builder: (controller) {
-                  if (controller.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  final user = controller.user.user;
-                  return CircleAvatar(
-                    backgroundColor: Colors.green,
-                    backgroundImage: NetworkImage(
-                        'http://10.0.2.2:8000/profiles/${user!.profileImage!}'),
-                  );
-                }),
+              init: ProfileController(),
+              builder: (controller) {
+                if (controller.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                final user = controller.user.user;
+                return user != null && user.profileImage != null
+                    ? CircleAvatar(
+                        backgroundColor: Colors.green,
+                        backgroundImage: NetworkImage(
+                            'http://10.0.2.2:8000/profiles/${user.profileImage!}'),
+                      )
+                    : const CircleAvatar(
+                        backgroundColor: mainColor,
+                        child: Icon(Icons.person),
+                      );
+              },
+            ),
           ),
         ),
       ],

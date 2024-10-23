@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:plan_shop/app/constants/colors.dart';
+import 'package:plan_shop/app/data/models/post_model.dart';
 
-class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key});
+class DetailScreen extends StatelessWidget {
+  const DetailScreen({super.key, this.postId, this.post});
 
-  @override
-  State<DetailScreen> createState() => _DetailScreenState();
-}
+  final String? postId;
+  final Data? post;
 
-class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +22,7 @@ class _DetailScreenState extends State<DetailScreen> {
             SizedBox(
               width: double.infinity,
               height: 400,
-              child: Image.network(
-                  'https://clipart-library.com/images_k/transparent-plants/transparent-plants-14.png'),
+              child: Image.network('http://10.0.2.2:8000/posts/${post!.image}'),
             ),
             _titlePlant(),
           ],
@@ -34,19 +33,19 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Widget _titlePlant() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 32),
+    return Padding(
+      padding: const EdgeInsets.only(left: 32, right: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Rubber Plant',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            '${post!.title}',
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
-            'Indoor plants',
-            style: TextStyle(
+            '${post!.description}',
+            style: const TextStyle(
               fontWeight: FontWeight.w300,
             ),
           ),
@@ -86,9 +85,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  const Text(
-                    '60 - 80 cm',
-                    style: TextStyle(color: Colors.white),
+                  Text(
+                    '${post!.height} cm',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -105,9 +104,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  const Text(
-                    '18 - 25 C',
-                    style: TextStyle(color: Colors.white),
+                  Text(
+                    '${post!.temperature} C',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -124,9 +123,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  const Text(
-                    'Ceramic',
-                    style: TextStyle(color: Colors.white),
+                  Text(
+                    '${post!.pot}',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -137,16 +136,16 @@ class _DetailScreenState extends State<DetailScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Total Price',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     Text(
-                      '24.99\$',
-                      style: TextStyle(
+                      '${post!.price}\$',
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -190,7 +189,7 @@ class _DetailScreenState extends State<DetailScreen> {
             foregroundColor: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
           child: const Icon(Icons.arrow_back_rounded),
         ),
