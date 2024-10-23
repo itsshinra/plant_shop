@@ -44,6 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 50),
                 _searchField(),
                 const SizedBox(height: 20),
+                _bannerPromotion(),
+                const SizedBox(height: 20),
+                _category(),
+                const SizedBox(height: 12),
                 MasonryGridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -147,6 +151,145 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: _circleButton(),
+    );
+  }
+
+  Widget _category() {
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 32),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Category',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                'see all',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.only(left: 32),
+          child: SizedBox(
+            height: 60,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  width: 160,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: lightContainer,
+                    gradient: const LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Color.fromARGB(255, 81, 199, 70),
+                        Color.fromARGB(255, 85, 218, 89),
+                      ],
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text(
+                        'Tropical',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Image.network(
+                          'https://cdn-icons-png.flaticon.com/128/5114/5114809.png'),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _bannerPromotion() {
+    return Container(
+      margin: const EdgeInsets.only(left: 16, right: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      height: 160,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: lightContainer,
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.green,
+            Colors.white,
+          ],
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                height: 35,
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: lightBackground,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.network(
+                      'https://cdn-icons-png.flaticon.com/128/2917/2917995.png',
+                      width: 25,
+                    ),
+                    const Text(
+                      'Plant tips',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Text(
+                'Help your plant survive \nwhen you are away.',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 150,
+            child: Expanded(
+              child: Image.network(
+                'https://www.frameratemerch.com/cdn/shop/products/plantpin_0002_Monstera.png?v=1658873676',
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

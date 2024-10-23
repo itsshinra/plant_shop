@@ -267,6 +267,7 @@ class _PostScreenState extends State<PostScreen> {
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: mainColor,
+                      width: 2,
                     ),
                     image: DecorationImage(
                       image: FileImage(File(postController.image!.path)),
@@ -290,7 +291,7 @@ class _PostScreenState extends State<PostScreen> {
       title: const Text('Post'),
       leading: IconButton(
         onPressed: () {
-          Navigator.pop(context);
+          Get.back();
         },
         icon: const Icon(
           Icons.keyboard_arrow_down_rounded,
