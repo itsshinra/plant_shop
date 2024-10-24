@@ -185,35 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               itemCount: 5,
               itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  width: 160,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: lightContainer,
-                    gradient: const LinearGradient(
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.topRight,
-                      colors: [
-                        Color.fromARGB(255, 81, 199, 70),
-                        Color.fromARGB(255, 85, 218, 89),
-                      ],
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text(
-                        'Tropical',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Image.network(
-                          'https://cdn-icons-png.flaticon.com/128/5114/5114809.png'),
-                    ],
-                  ),
-                );
+                return _categoryItem();
               },
             ),
           ),
@@ -222,9 +194,42 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _categoryItem() {
+    return Container(
+      margin: const EdgeInsets.only(right: 8),
+      width: 160,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        gradient: const LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+            Color.fromARGB(255, 99, 209, 89),
+            mainColor,
+          ],
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const Text(
+            'Tropical',
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          Image.network(
+            'https://cdn-icons-png.flaticon.com/128/5114/5114809.png',
+            width: 40,
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _bannerPromotion() {
     return Container(
-      margin: const EdgeInsets.only(left: 16, right: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       height: 160,
       decoration: BoxDecoration(
@@ -234,6 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
+            Color.fromARGB(255, 99, 209, 89),
             Colors.green,
             Colors.white,
           ],
@@ -277,15 +283,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
           SizedBox(
             height: 150,
-            child: Expanded(
-              child: Image.network(
-                'https://www.frameratemerch.com/cdn/shop/products/plantpin_0002_Monstera.png?v=1658873676',
-              ),
+            child: Image.network(
+              'https://www.frameratemerch.com/cdn/shop/products/plantpin_0002_Monstera.png?v=1658873676',
+              loadingBuilder: (context, child, progress) {
+                return progress == null
+                    ? child
+                    : const Center(child: CircularProgressIndicator());
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.error);
+              },
             ),
           ),
         ],
