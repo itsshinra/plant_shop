@@ -40,7 +40,7 @@ class SignUpView extends GetView<SignupController> {
                         children: [
                           controller.image == null
                               ? const CircleAvatar(
-                                  radius: 75,
+                                  radius: 73,
                                   backgroundColor: mainColor,
                                   child: CircleAvatar(
                                     radius: 70,
@@ -77,6 +77,7 @@ class SignUpView extends GetView<SignupController> {
                       );
                     },
                   ),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 16),
@@ -85,23 +86,26 @@ class SignUpView extends GetView<SignupController> {
                         Expanded(
                           child: TextFormField(
                             controller: nameController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
+                              prefixIcon: HugeIcon(
+                                icon: HugeIcons.strokeRoundedUser,
+                                color: Colors.grey,
+                              ),
                               hintText: "Name",
-                              hintStyle: const TextStyle(color: mainColor),
-                              enabledBorder: const OutlineInputBorder(
+                              hintStyle: TextStyle(color: Colors.grey),
+                              enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                borderSide: BorderSide(color: mainColor),
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 189, 188, 188),
+                                  width: 1.8,
+                                ),
                               ),
-                              focusedBorder: const OutlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
-                                    BorderSide(color: mainColor, width: 3),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(color: mainColor),
+                                    BorderSide(color: mainColor, width: 2),
                               ),
                             ),
                             validator: (value) {
@@ -123,23 +127,26 @@ class SignUpView extends GetView<SignupController> {
                         Expanded(
                           child: TextFormField(
                             controller: emailController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
+                              prefixIcon: HugeIcon(
+                                icon: HugeIcons.strokeRoundedMail01,
+                                color: Colors.grey,
+                              ),
                               hintText: "Email",
-                              hintStyle: const TextStyle(color: mainColor),
-                              enabledBorder: const OutlineInputBorder(
+                              hintStyle: TextStyle(color: Colors.grey),
+                              enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                borderSide: BorderSide(color: mainColor),
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 189, 188, 188),
+                                  width: 1.8,
+                                ),
                               ),
-                              focusedBorder: const OutlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
-                                    BorderSide(color: mainColor, width: 3),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(color: mainColor),
+                                    BorderSide(color: mainColor, width: 2),
                               ),
                             ),
                             validator: (value) {
@@ -164,23 +171,26 @@ class SignUpView extends GetView<SignupController> {
                         Expanded(
                           child: TextFormField(
                             controller: passwordController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
+                              prefixIcon: HugeIcon(
+                                icon: HugeIcons.strokeRoundedSquareLockPassword,
+                                color: Colors.grey,
+                              ),
                               hintText: "Password",
-                              hintStyle: const TextStyle(color: mainColor),
-                              enabledBorder: const OutlineInputBorder(
+                              hintStyle: TextStyle(color: Colors.grey),
+                              enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                borderSide: BorderSide(color: mainColor),
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 189, 188, 188),
+                                  width: 1.8,
+                                ),
                               ),
-                              focusedBorder: const OutlineInputBorder(
+                              focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
-                                    BorderSide(color: mainColor, width: 3),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(color: mainColor),
+                                    BorderSide(color: mainColor, width: 2),
                               ),
                             ),
                             validator: (value) {
@@ -200,43 +210,39 @@ class SignUpView extends GetView<SignupController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  const WidgetStatePropertyAll(mainColor),
-                              foregroundColor:
-                                  const WidgetStatePropertyAll(Colors.white),
-                              shape: WidgetStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                            ),
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                final email = emailController.text.trim();
-                                final name = nameController.text.trim();
-                                final password = passwordController.text.trim();
-                                final status = await controller.register(
-                                    name: name,
-                                    email: email,
-                                    password: password);
-                                if (status) {
-                                  _formKey.currentState!.reset();
-                                }
-                              }
-                            },
-                            child: const Text(
-                              'Signup',
-                              style: TextStyle(fontSize: 16),
+                    child: SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              const WidgetStatePropertyAll(mainColor),
+                          foregroundColor:
+                              const WidgetStatePropertyAll(Colors.white),
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
                             ),
                           ),
                         ),
-                      ],
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final email = emailController.text.trim();
+                            final name = nameController.text.trim();
+                            final password = passwordController.text.trim();
+                            final status = await controller.register(
+                                name: name, email: email, password: password);
+                            if (status) {
+                              _formKey.currentState!.reset();
+                            }
+                          }
+                        },
+                        child: const Text(
+                          'Sign up',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
                     ),
                   ),
                   Row(
@@ -249,7 +255,8 @@ class SignUpView extends GetView<SignupController> {
                         },
                         child: const Text(
                           'Login',
-                          style: TextStyle(color: mainColor),
+                          style: TextStyle(
+                              color: mainColor, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],

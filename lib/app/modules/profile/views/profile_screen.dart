@@ -66,24 +66,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: "Bio...",
-                            hintStyle: const TextStyle(color: mainColor),
-                            enabledBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(color: mainColor),
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              width: 2,
+                              color: mainColor,
                             ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide:
-                                  BorderSide(color: mainColor, width: 3),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(color: mainColor),
+                          ),
+                          child: const Text(
+                            'Bio...',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: mainColor,
                             ),
                           ),
                         ),
@@ -116,13 +113,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         HugeIcon(
                           icon: HugeIcons.strokeRoundedLogout01,
-                          color: Color.fromARGB(255, 103, 134, 74),
+                          color: mainColor,
                         ),
                         SizedBox(width: 10),
                         Text(
                           'Logout',
                           style: TextStyle(
-                            color: Color.fromARGB(255, 103, 134, 74),
+                            color: mainColor,
                             fontSize: 20,
                             fontWeight: FontWeight.w300,
                           ),
@@ -256,23 +253,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            shape: const CircleBorder(),
-            backgroundColor: mainColor,
-            foregroundColor: Colors.white,
-          ),
+        IconButton(
           onPressed: () {
             Get.back();
           },
-          child: const Icon(Icons.arrow_back_rounded),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            size: 20,
+          ),
         ),
         const Text(
           'Profile',
           style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w500,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
           ),
         ),
         TextButton(

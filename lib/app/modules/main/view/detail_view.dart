@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -23,7 +24,8 @@ class DetailScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: 400,
-              child: Image.network('http://10.0.2.2:8000/posts/${post!.image}'),
+              child: CachedNetworkImage(
+                  imageUrl: 'http://10.0.2.2:8000/posts/${post!.image}'),
             ),
             _titlePlant(),
           ],
@@ -57,7 +59,7 @@ class DetailScreen extends StatelessWidget {
 
   Widget _bottomSheet() {
     return Container(
-      padding: const EdgeInsets.only(top: 26, bottom: 26),
+      padding: const EdgeInsets.only(top: 16, bottom: 26),
       height: 250,
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -70,6 +72,14 @@ class DetailScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white54,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            width: 120,
+            height: 2,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -157,14 +167,14 @@ class DetailScreen extends StatelessWidget {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 20),
+                        horizontal: 28, vertical: 16),
                     elevation: 0,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),
-                    backgroundColor: const Color.fromARGB(255, 62, 104, 62),
+                    backgroundColor: const Color.fromARGB(255, 90, 170, 99),
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () {},
@@ -182,24 +192,18 @@ class DetailScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            shape: const CircleBorder(),
-            backgroundColor: mainColor,
-            foregroundColor: Colors.white,
-          ),
+        IconButton(
           onPressed: () {
             Get.back();
           },
-          child: const Icon(Icons.arrow_back_rounded),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
         ),
         IconButton(
           onPressed: () {
             Get.to(() => const CartView());
           },
           icon: const HugeIcon(
-            icon: HugeIcons.strokeRoundedShoppingBagFavorite,
+            icon: HugeIcons.strokeRoundedShoppingBag02,
             color: Colors.black,
           ),
         )

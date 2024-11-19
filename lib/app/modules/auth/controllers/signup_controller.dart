@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plan_shop/app/data/providers/api_service.dart';
-import 'package:plan_shop/app/modules/main/view/home_screen.dart';
+import 'package:plan_shop/app/modules/main/view/home_view.dart';
 
 class SignupController extends GetxController {
   final _imagePicker = ImagePicker();

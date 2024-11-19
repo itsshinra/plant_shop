@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:plan_shop/app/data/models/category_model.dart';
+import 'package:plan_shop/app/data/models/category_plant_model.dart';
 import 'package:plan_shop/app/data/models/login_model.dart';
 import 'package:plan_shop/app/data/models/post_model.dart';
 
@@ -164,9 +166,9 @@ class ApiService {
       rethrow;
     }
   }
-  /////////////////////////////////////////////////
+  //////////////////////////////////////////////////////
 
-  //////////////////////  Post  //////////////////////
+  //////////////////////  Post  ////////////////////////
   // Get Posts
   Future<PostModel> getPosts() async {
     try {
@@ -190,6 +192,63 @@ class ApiService {
         throw Exception("Unautherized");
       }
       throw Exception("Failed to get Post");
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //////////////////////  Category  ////////////////////
+  // Get Category
+  Future<CategoryModel> getCategory() async {
+    try {
+      final response = await dio.get(
+        "$baseUrl/categories",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ${box.read('token')}',
+          },
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return CategoryModel.fromJson(response.data);
+      } else if (response.statusCode == 401) {
+        throw Exception("Unautherized");
+      }
+      throw Exception("Failed to get Category");
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // Get Category with post
+  Future<CategoryPlantModel> getCategoryPlant() async {
+    try {
+      final response = await dio.get(
+        "$baseUrl/post/categories",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ${box.read('token')}',
+          },
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return CategoryPlantModel.fromJson(response.data);
+      } else if (response.statusCode == 401) {
+        throw Exception("Unautherized");
+      }
+      throw Exception("Failed to get Category Plant");
     } catch (e) {
       rethrow;
     }

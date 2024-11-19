@@ -1,12 +1,16 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:plan_shop/app/constants/colors.dart';
+import 'package:plan_shop/app/data/models/category_model.dart';
 import 'package:plan_shop/app/modules/cart/views/cart_view.dart';
-import 'package:plan_shop/app/modules/main/view/detail_screen.dart';
+import 'package:plan_shop/app/modules/main/controllers/category_controller.dart';
+import 'package:plan_shop/app/modules/main/view/category_view.dart';
+import 'package:plan_shop/app/modules/main/view/detail_view.dart';
 import 'package:plan_shop/app/modules/post/controllers/post_controller.dart';
 import 'package:plan_shop/app/modules/post/views/post_screen.dart';
 import 'package:plan_shop/app/modules/profile/controllers/profile_controller.dart';
@@ -41,116 +45,119 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 _searchField(),
                 const SizedBox(height: 20),
                 _bannerPromotion(),
                 const SizedBox(height: 20),
                 _category(),
                 const SizedBox(height: 12),
-                MasonryGridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  itemCount: controller.posts.posts?.data?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final plant = controller.posts.posts!.data![index];
-                    return GestureDetector(
-                      onTap: () {
-                        Get.to(
-                          () => DetailScreen(
-                            postId: plant.id.toString(),
-                            post: plant,
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 16),
-                        width: 170,
-                        decoration: BoxDecoration(
-                          color: lightContainer,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: double.infinity,
-                              child: Image.network(
-                                plant.image != null
-                                    ? "http://10.0.2.2:8000/posts/${plant.image}"
-                                    : 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=',
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  '${plant.title}',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(
-                                  '${plant.description}',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 12,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '${plant.price}\$',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    log('add to favorites');
-                                  },
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.black,
-                                    ),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(5),
-                                      child: HugeIcon(
-                                        icon: HugeIcons.strokeRoundedHeartAdd,
-                                        size: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                _postItem(controller),
               ],
             ),
           );
         },
       ),
       floatingActionButton: _circleButton(),
+    );
+  }
+
+  Widget _postItem(PostController controller) {
+    return MasonryGridView.count(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      itemCount: controller.posts.posts?.data?.length ?? 0,
+      itemBuilder: (context, index) {
+        final plant = controller.posts.posts!.data![index];
+        return GestureDetector(
+          onTap: () {
+            Get.to(
+              () => DetailScreen(
+                postId: plant.id.toString(),
+                post: plant,
+              ),
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            width: 170,
+            decoration: BoxDecoration(
+              color: lightContainer,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: CachedNetworkImage(
+                    imageUrl: plant.image != null
+                        ? "http://10.0.2.2:8000/posts/${plant.image}"
+                        : 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Column(
+                  children: [
+                    Text(
+                      '${plant.title}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      '${plant.description}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${plant.price}\$',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        log('add to favorites');
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black,
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(5),
+                          child: HugeIcon(
+                            icon: HugeIcons.strokeRoundedHeartAdd,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -180,49 +187,65 @@ class _HomeScreenState extends State<HomeScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 32),
           child: SizedBox(
-            height: 60,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return _categoryItem();
-              },
-            ),
+            height: 50,
+            child: GetBuilder<CategoryController>(
+                init: CategoryController(),
+                builder: (controller) {
+                  if (controller.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.category.category!.length,
+                    itemBuilder: (context, index) {
+                      final category = controller.category.category![index];
+                      return _categoryItem(category);
+                    },
+                  );
+                }),
           ),
         ),
       ],
     );
   }
 
-  Widget _categoryItem() {
-    return Container(
-      margin: const EdgeInsets.only(right: 8),
-      width: 160,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        gradient: const LinearGradient(
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-          colors: [
-            Color.fromARGB(255, 99, 209, 89),
-            mainColor,
-          ],
+  Widget _categoryItem(Category category) {
+    return GestureDetector(
+      onTap: () => Get.to(
+        () => CategoryView(
+          category: category,
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Text(
-            'Tropical',
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
+      child: Container(
+        margin: const EdgeInsets.only(right: 8),
+        width: 160,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.topRight,
+            colors: [
+              Color.fromARGB(255, 99, 209, 89),
+              Colors.lightGreenAccent,
+            ],
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              '${category.title}',
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+              ),
             ),
-          ),
-          Image.network(
-            'https://cdn-icons-png.flaticon.com/128/5114/5114809.png',
-            width: 40,
-          ),
-        ],
+            Image.network(
+              'http://10.0.2.2:8000/categories/${category.image}',
+              width: 40,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -233,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       height: 160,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
         color: lightContainer,
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
