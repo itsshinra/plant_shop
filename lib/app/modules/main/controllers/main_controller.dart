@@ -6,6 +6,7 @@ import 'package:plan_shop/app/data/providers/api_service.dart';
 class MainController extends GetxController {
   final box = GetStorage();
   final apiService = ApiService();
+  final isLoading = false.obs;
 
   void logout() async {
     await apiService.logout();
@@ -18,5 +19,30 @@ class MainController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       colorText: Colors.green,
     );
+  }
+
+  Future<void> deleteUser() async {
+    try {
+      isLoading.value = true;
+      bool success = await apiService.delete();
+      box.remove("token");
+
+      if (success) {
+        Get.snackbar(
+          'Success',
+          "Account deleted successfully",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      }
+      Get.offAllNamed('/login');
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        "Faild to delete account",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
   }
 }

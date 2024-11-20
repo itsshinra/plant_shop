@@ -43,6 +43,9 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   dio: ^5.7.0
   skeletonizer: ^1.4.2
+  cached_network_image: ^3.4.1
+  flutter_slidable: ^3.1.1
+  crystal_navigation_bar: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +63,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+      - assets/
+      - assets/plant/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -67,8 +73,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/
+ 
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

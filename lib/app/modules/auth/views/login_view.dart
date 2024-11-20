@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/modules/auth/controllers/login_controller.dart';
 import 'package:plan_shop/app/modules/auth/views/sign_up_view.dart';
@@ -28,11 +29,11 @@ class LoginView extends GetView<LoginController> {
                   SizedBox(
                     height: 250,
                     width: double.infinity,
-                    child: Image.asset('assets/shop.png'),
+                    child: Image.asset('assets/rb_65197.png'),
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'Login',
+                    "Let's Get Started",
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -47,23 +48,34 @@ class LoginView extends GetView<LoginController> {
                           child: TextFormField(
                             controller: emailController,
                             decoration: InputDecoration(
-                              hintText: "Email",
-                              hintStyle: const TextStyle(color: mainColor),
+                              prefixIcon: const HugeIcon(
+                                icon: HugeIcons.strokeRoundedMail01,
+                                color: Colors.grey,
+                              ),
+                              hintText: 'Email',
+                              hintStyle: TextStyle(color: Colors.grey.shade500),
                               enabledBorder: const OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                borderSide: BorderSide(color: mainColor),
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 189, 188, 188),
+                                  width: 1.8,
+                                ),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: mainColor, width: 3),
                               ),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(12),
                                 borderSide: const BorderSide(color: mainColor),
                               ),
+                              errorText:
+                                  controller.emailErrorMessage.value.isEmpty
+                                      ? null
+                                      : controller.emailErrorMessage.value,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -88,23 +100,34 @@ class LoginView extends GetView<LoginController> {
                           child: TextFormField(
                             controller: passwordController,
                             decoration: InputDecoration(
+                              prefixIcon: const HugeIcon(
+                                icon: HugeIcons.strokeRoundedSquareLockPassword,
+                                color: Colors.grey,
+                              ),
                               hintText: "Password",
-                              hintStyle: const TextStyle(color: mainColor),
+                              hintStyle: TextStyle(color: Colors.grey.shade500),
                               enabledBorder: const OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                borderSide: BorderSide(color: mainColor),
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 189, 188, 188),
+                                  width: 1.8,
+                                ),
                               ),
                               focusedBorder: const OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: mainColor, width: 3),
                               ),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(12),
                                 borderSide: const BorderSide(color: mainColor),
                               ),
+                              errorText:
+                                  controller.passwordErrorMessage.value.isEmpty
+                                      ? null
+                                      : controller.passwordErrorMessage.value,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -113,6 +136,7 @@ class LoginView extends GetView<LoginController> {
                               if (value.length < 6) {
                                 return "Password must be at least 6 characters";
                               }
+
                               return null;
                             },
                           ),
@@ -123,37 +147,34 @@ class LoginView extends GetView<LoginController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  const WidgetStatePropertyAll(mainColor),
-                              foregroundColor:
-                                  const WidgetStatePropertyAll(Colors.white),
-                              shape: WidgetStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                final email = emailController.text.trim();
-                                final password = passwordController.text.trim();
-                                controller.login(
-                                    email: email, password: password);
-                              }
-                            },
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(fontSize: 16),
+                    child: SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              const WidgetStatePropertyAll(mainColor),
+                          foregroundColor:
+                              const WidgetStatePropertyAll(Colors.white),
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
                             ),
                           ),
                         ),
-                      ],
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            final email = emailController.text.trim();
+                            final password = passwordController.text.trim();
+                            controller.login(email: email, password: password);
+                          }
+                        },
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
                     ),
                   ),
                   Row(
@@ -162,11 +183,12 @@ class LoginView extends GetView<LoginController> {
                       const Text("Don't have an account?"),
                       TextButton(
                         onPressed: () {
-                          Get.to(const SignUpView());
+                          Get.to(() => SignUpView());
                         },
                         child: const Text(
                           'Signup',
-                          style: TextStyle(color: mainColor),
+                          style: TextStyle(
+                              color: mainColor, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],

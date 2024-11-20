@@ -1,15 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:plan_shop/app/constants/colors.dart';
+import 'package:plan_shop/app/data/models/post_model.dart';
+import 'package:plan_shop/app/modules/cart/views/cart_view.dart';
 
-class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key});
+class DetailScreen extends StatelessWidget {
+  const DetailScreen({super.key, this.postId, this.post});
 
-  @override
-  State<DetailScreen> createState() => _DetailScreenState();
-}
+  final String? postId;
+  final Data? post;
 
-class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +24,8 @@ class _DetailScreenState extends State<DetailScreen> {
             SizedBox(
               width: double.infinity,
               height: 400,
-              child: Image.network(
-                  'https://clipart-library.com/images_k/transparent-plants/transparent-plants-14.png'),
+              child: CachedNetworkImage(
+                  imageUrl: 'http://10.0.2.2:8000/posts/${post!.image}'),
             ),
             _titlePlant(),
           ],
@@ -34,19 +36,19 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Widget _titlePlant() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 32),
+    return Padding(
+      padding: const EdgeInsets.only(left: 32, right: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Rubber Plant',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            '${post!.title}',
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
-            'Indoor plants',
-            style: TextStyle(
+            '${post!.description}',
+            style: const TextStyle(
               fontWeight: FontWeight.w300,
             ),
           ),
@@ -57,7 +59,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Widget _bottomSheet() {
     return Container(
-      padding: const EdgeInsets.only(top: 26, bottom: 26),
+      padding: const EdgeInsets.only(top: 16, bottom: 26),
       height: 250,
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -70,6 +72,14 @@ class _DetailScreenState extends State<DetailScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white54,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            width: 120,
+            height: 2,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -86,9 +96,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  const Text(
-                    '60 - 80 cm',
-                    style: TextStyle(color: Colors.white),
+                  Text(
+                    '${post!.height} cm',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -105,9 +115,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  const Text(
-                    '18 - 25 C',
-                    style: TextStyle(color: Colors.white),
+                  Text(
+                    '${post!.temperature} C',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -124,9 +134,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  const Text(
-                    'Ceramic',
-                    style: TextStyle(color: Colors.white),
+                  Text(
+                    '${post!.pot}',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -137,16 +147,16 @@ class _DetailScreenState extends State<DetailScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Total Price',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     Text(
-                      '24.99\$',
-                      style: TextStyle(
+                      '${post!.price}\$',
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -157,14 +167,14 @@ class _DetailScreenState extends State<DetailScreen> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 20),
+                        horizontal: 28, vertical: 16),
                     elevation: 0,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(15),
                       ),
                     ),
-                    backgroundColor: const Color.fromARGB(255, 62, 104, 62),
+                    backgroundColor: const Color.fromARGB(255, 90, 170, 99),
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () {},
@@ -182,22 +192,18 @@ class _DetailScreenState extends State<DetailScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            shape: const CircleBorder(),
-            backgroundColor: const Color.fromARGB(255, 103, 134, 74),
-            foregroundColor: Colors.white,
-          ),
+        IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
-          child: const Icon(Icons.arrow_back_rounded),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => const CartView());
+          },
           icon: const HugeIcon(
-            icon: HugeIcons.strokeRoundedShoppingBagFavorite,
+            icon: HugeIcons.strokeRoundedShoppingBag02,
             color: Colors.black,
           ),
         )

@@ -16,7 +16,7 @@ class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkBackground,
+      backgroundColor: lightBackground,
       appBar: _appBar(context),
       body: SafeArea(
         child: Align(
@@ -35,14 +35,20 @@ class _PostScreenState extends State<PostScreen> {
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Title",
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: mainColor),
                             enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide: BorderSide(color: mainColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: mainColor, width: 3),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -60,14 +66,20 @@ class _PostScreenState extends State<PostScreen> {
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Desciption",
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: mainColor),
                             enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide: BorderSide(color: mainColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: mainColor, width: 3),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -86,14 +98,20 @@ class _PostScreenState extends State<PostScreen> {
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Price",
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: mainColor),
                             enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide: BorderSide(color: mainColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: mainColor, width: 3),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -111,14 +129,20 @@ class _PostScreenState extends State<PostScreen> {
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Height",
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: mainColor),
                             enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide: BorderSide(color: mainColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: mainColor, width: 3),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -137,14 +161,20 @@ class _PostScreenState extends State<PostScreen> {
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Temperature",
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: mainColor),
                             enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide: BorderSide(color: mainColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: mainColor, width: 3),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -162,14 +192,20 @@ class _PostScreenState extends State<PostScreen> {
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Pot",
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: mainColor),
                             enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide: BorderSide(color: mainColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              borderSide:
+                                  BorderSide(color: mainColor, width: 3),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -181,6 +217,7 @@ class _PostScreenState extends State<PostScreen> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -203,6 +240,7 @@ class _PostScreenState extends State<PostScreen> {
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: mainColor,
+                      width: 2,
                     ),
                   ),
                   child: Column(
@@ -216,7 +254,7 @@ class _PostScreenState extends State<PostScreen> {
                         'Click to upload\nyour plant',
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.w400,
                         ),
                         textAlign: TextAlign.center,
@@ -229,6 +267,7 @@ class _PostScreenState extends State<PostScreen> {
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: mainColor,
+                      width: 2,
                     ),
                     image: DecorationImage(
                       image: FileImage(File(postController.image!.path)),
@@ -245,13 +284,14 @@ class _PostScreenState extends State<PostScreen> {
 
   AppBar _appBar(BuildContext context) {
     return AppBar(
-      backgroundColor: darkBackground,
-      foregroundColor: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      backgroundColor: lightBackground,
+      foregroundColor: Colors.black,
       centerTitle: true,
       title: const Text('Post'),
       leading: IconButton(
         onPressed: () {
-          Navigator.pop(context);
+          Get.back();
         },
         icon: const Icon(
           Icons.keyboard_arrow_down_rounded,
