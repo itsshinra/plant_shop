@@ -8,7 +8,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:plan_shop/app/data/models/category_model.dart';
 import 'package:plan_shop/app/modules/main/controllers/category_controller.dart';
 
-import '../../../constants/colors.dart';
+import '../../../../constants/colors.dart';
 
 class CategoryView extends StatelessWidget {
   CategoryView({super.key, this.category});

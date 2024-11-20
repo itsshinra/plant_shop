@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/data/providers/api_service.dart';
 
 import '../../cart/views/cart_view.dart';
 import '../../post/views/post_screen.dart';
-import '../../profile/views/profile_screen.dart';
+import '../../profile/views/profile_view.dart';
 import '../../search/view/search_veiw.dart';
-import '../view/home_view.dart';
+import '../view/screens/home_view.dart';
 
 class MainController extends GetxController {
   final box = GetStorage();
@@ -38,7 +39,8 @@ class MainController extends GetxController {
       'Success',
       'User logged out successfully',
       snackPosition: SnackPosition.BOTTOM,
-      colorText: Colors.green,
+      colorText: Colors.white,
+      backgroundColor: mainColor,
     );
   }
 

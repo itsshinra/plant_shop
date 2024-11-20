@@ -13,27 +13,6 @@ class CartView extends StatelessWidget {
       appBar: _appBar(),
       body: ListView(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 16, left: 16),
-            child: Text(
-              'Shipping Address',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          _address(),
-          const Padding(
-            padding: EdgeInsets.only(top: 16, left: 16),
-            child: Text(
-              'Order List',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           const SizedBox(height: 8),
           ListView.builder(
             shrinkWrap: true,
@@ -393,64 +372,11 @@ class CartView extends StatelessWidget {
     );
   }
 
-  Widget _address() {
-    return Container(
-      margin: const EdgeInsets.all(16),
-      height: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: lightContainer,
-        border: Border.all(color: Colors.grey.shade300, width: 2),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(
-            height: 100,
-            child: Image.asset('assets/Address-bro.png'),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'Enter your pin to confirm.',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const HugeIcon(
-              icon: HugeIcons.strokeRoundedEdit02,
-              color: Colors.black,
-              size: 22,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   AppBar _appBar() {
     return AppBar(
       surfaceTintColor: Colors.transparent,
       backgroundColor: lightBackground,
-      title: const Text('My Orders'),
+      title: const Text('My Cart'),
       titleTextStyle: const TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: 28,

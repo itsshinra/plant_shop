@@ -19,7 +19,8 @@ class SignUpView extends GetView<SignupController> {
       body: Obx(
         () {
           if (controller.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(color: mainColor));
           } else {
             return Form(
               key: _formKey,

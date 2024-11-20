@@ -55,12 +55,10 @@ class _MainViewState extends State<MainView> {
                     init: ProfileController(),
                     builder: (controller) {
                       if (controller.isLoading) {
-                        return const Center(
-                          child: Skeletonizer(
-                            enabled: true,
-                            child: CircleAvatar(
-                              radius: 15,
-                            ),
+                        return const Skeletonizer(
+                          enabled: true,
+                          child: CircleAvatar(
+                            radius: 15,
                           ),
                         );
                       }

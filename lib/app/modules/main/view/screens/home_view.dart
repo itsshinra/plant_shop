@@ -8,8 +8,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/data/models/category_model.dart';
 import 'package:plan_shop/app/modules/main/controllers/category_controller.dart';
-import 'package:plan_shop/app/modules/main/view/category_view.dart';
-import 'package:plan_shop/app/modules/main/view/detail_view.dart';
+import 'package:plan_shop/app/modules/main/view/screens/category_view.dart';
+import 'package:plan_shop/app/modules/main/view/screens/detail_view.dart';
 import 'package:plan_shop/app/modules/post/controllers/post_controller.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -337,7 +337,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const Text(
               "Discover",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600, fontSize: 26, color: mainColor),
             ),
           ],
         ),
@@ -346,7 +347,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           height: 50,
           margin: const EdgeInsets.only(right: 32),
-          padding: const EdgeInsets.all(6),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
@@ -354,10 +355,12 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.grey.shade400,
             ),
           ),
-          child: const Icon(
-            HugeIcons.strokeRoundedSearch01,
-            size: 20,
-            color: Colors.black,
+          child: const Badge(
+            child: Icon(
+              HugeIcons.strokeRoundedNotification02,
+              size: 20,
+              color: Colors.black,
+            ),
           ),
         ),
       ],

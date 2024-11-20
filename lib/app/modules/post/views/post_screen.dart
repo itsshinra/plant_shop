@@ -18,199 +18,188 @@ class _PostScreenState extends State<PostScreen> {
       backgroundColor: lightBackground,
       appBar: _appBar(context),
       body: SafeArea(
-        child: Align(
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
-                _uploadImage(),
-                const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: "Title",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 189, 188, 188),
-                                width: 1.8,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide:
-                                  BorderSide(color: mainColor, width: 3),
-                            ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // const SizedBox(height: 20),
+            _uploadImage(),
+            const SizedBox(height: 16),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: "Title",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 189, 188, 188),
+                            width: 1.8,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: "Desciption",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 189, 188, 188),
-                                width: 1.8,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide:
-                                  BorderSide(color: mainColor, width: 3),
-                            ),
-                          ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: mainColor, width: 3),
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: "Price",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 189, 188, 188),
-                                width: 1.8,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide:
-                                  BorderSide(color: mainColor, width: 3),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: "Height",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 189, 188, 188),
-                                width: 1.8,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide:
-                                  BorderSide(color: mainColor, width: 3),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: "Temperature",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 189, 188, 188),
-                                width: 1.8,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide:
-                                  BorderSide(color: mainColor, width: 3),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            hintText: "Pot",
-                            hintStyle: TextStyle(color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(255, 189, 188, 188),
-                                width: 1.8,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide:
-                                  BorderSide(color: mainColor, width: 3),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-              ],
+                ],
+              ),
             ),
-          ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      maxLines: 3,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: "Desciption",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 189, 188, 188),
+                            width: 1.8,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: mainColor, width: 3),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: "Price",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 189, 188, 188),
+                            width: 1.8,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: mainColor, width: 3),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: "Height",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 189, 188, 188),
+                            width: 1.8,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: mainColor, width: 3),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: "Temperature",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 189, 188, 188),
+                            width: 1.8,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: mainColor, width: 3),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: "Pot",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 189, 188, 188),
+                            width: 1.8,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: mainColor, width: 3),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  elevation: const WidgetStatePropertyAll(0),
+                  backgroundColor: const WidgetStatePropertyAll(mainColor),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Text(
+                  'Post',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -224,7 +213,7 @@ class _PostScreenState extends State<PostScreen> {
           onTap: postController.pickImage,
           child: postController.image == null
               ? Container(
-                  height: 300,
+                  height: 280,
                   width: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -253,6 +242,8 @@ class _PostScreenState extends State<PostScreen> {
                   ),
                 )
               : Container(
+                  height: 280,
+                  width: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
@@ -264,8 +255,6 @@ class _PostScreenState extends State<PostScreen> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  height: 300,
-                  width: 200,
                 ),
         );
       },
@@ -284,23 +273,6 @@ class _PostScreenState extends State<PostScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
-      actions: [
-        ElevatedButton(
-          style: ButtonStyle(
-            elevation: const WidgetStatePropertyAll(0),
-            backgroundColor: const WidgetStatePropertyAll(mainColor),
-            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-            ),
-          ),
-          onPressed: () {},
-          child: const Text(
-            'Post',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        const SizedBox(width: 6),
-      ],
     );
   }
 }

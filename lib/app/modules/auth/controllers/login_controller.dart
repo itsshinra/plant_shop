@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/data/providers/api_service.dart';
 import 'package:plan_shop/app/modules/main/view/main_view.dart';
 
@@ -26,7 +27,7 @@ class LoginController extends GetxController {
           'Success',
           "User logged in successfully",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
+          backgroundColor: mainColor,
           colorText: Colors.white,
         );
         Get.offAll(() => const MainView());

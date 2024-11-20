@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/data/providers/api_service.dart';
 
 import '../../main/view/main_view.dart';
@@ -34,7 +35,7 @@ class SignupController extends GetxController {
           'Success',
           'User registered successfully',
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
+          backgroundColor: mainColor,
           colorText: Colors.white,
         );
         return true;
