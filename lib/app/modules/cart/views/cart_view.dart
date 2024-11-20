@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:plan_shop/app/constants/colors.dart';
 
@@ -450,31 +449,13 @@ class CartView extends StatelessWidget {
   AppBar _appBar() {
     return AppBar(
       surfaceTintColor: Colors.transparent,
-      leading: IconButton(
-        onPressed: () => Get.back(),
-        icon: const Icon(
-          Icons.arrow_back_ios_new_outlined,
-          size: 18,
-          color: Colors.black,
-        ),
-      ),
-      centerTitle: true,
       backgroundColor: lightBackground,
       title: const Text('My Orders'),
       titleTextStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
         fontSize: 28,
         color: Colors.black,
       ),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.more_vert,
-            size: 32,
-          ),
-        ),
-      ],
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:plan_shop/app/modules/auth/views/login_view.dart';
 import 'package:plan_shop/app/modules/auth/views/sign_up_view.dart';
 import 'package:plan_shop/app/modules/main/bindings/main_binding.dart';
 import 'package:plan_shop/app/modules/main/middleware/main_middleware.dart';
-import 'package:plan_shop/app/modules/main/view/home_view.dart';
+import 'package:plan_shop/app/modules/main/view/main_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/main',
-          page: () => HomeScreen(),
+          page: () => MainView(),
           binding: MainBinding(),
           middlewares: [
             MainMiddleware(),

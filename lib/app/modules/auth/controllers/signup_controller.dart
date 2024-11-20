@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plan_shop/app/data/providers/api_service.dart';
-import 'package:plan_shop/app/modules/main/view/home_view.dart';
+
+import '../../main/view/main_view.dart';
 
 class SignupController extends GetxController {
   final _imagePicker = ImagePicker();
@@ -28,7 +29,7 @@ class SignupController extends GetxController {
         image: image,
       );
       if (response) {
-        Get.offAll(() => const HomeScreen());
+        Get.offAll(() => const MainView());
         Get.snackbar(
           'Success',
           'User registered successfully',

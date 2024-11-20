@@ -3,10 +3,31 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:plan_shop/app/data/providers/api_service.dart';
 
+import '../../cart/views/cart_view.dart';
+import '../../post/views/post_screen.dart';
+import '../../profile/views/profile_screen.dart';
+import '../../search/view/search_veiw.dart';
+import '../view/home_view.dart';
+
 class MainController extends GetxController {
   final box = GetStorage();
   final apiService = ApiService();
   final isLoading = false.obs;
+
+  var selectedIndex = 0.obs;
+
+  final screens = [
+    const HomeScreen(),
+    const SearchVeiw(),
+    const PostScreen(),
+    const CartView(),
+    const ProfileScreen(),
+  ];
+
+  void changeIndex(int index) {
+    selectedIndex.value = index;
+    update();
+  }
 
   void logout() async {
     await apiService.logout();

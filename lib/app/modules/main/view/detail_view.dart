@@ -203,7 +203,7 @@ class DetailScreen extends StatelessWidget {
             Get.to(() => const CartView());
           },
           icon: const HugeIcon(
-            icon: HugeIcons.strokeRoundedShoppingBag02,
+            icon: HugeIcons.strokeRoundedShoppingBasket03,
             color: Colors.black,
           ),
         )

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plan_shop/app/constants/colors.dart';
@@ -28,31 +27,29 @@ class _PostScreenState extends State<PostScreen> {
                 const SizedBox(height: 20),
                 _uploadImage(),
                 const SizedBox(height: 20),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Row(
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Title",
-                            hintStyle: const TextStyle(color: mainColor),
-                            enabledBorder: const OutlineInputBorder(
+                            hintStyle: TextStyle(color: Colors.grey),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(color: mainColor),
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 189, 188, 188),
+                                width: 1.8,
+                              ),
                             ),
-                            focusedBorder: const OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide:
                                   BorderSide(color: mainColor, width: 3),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(color: mainColor),
                             ),
                           ),
                         ),
@@ -60,30 +57,29 @@ class _PostScreenState extends State<PostScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Desciption",
-                            hintStyle: const TextStyle(color: mainColor),
-                            enabledBorder: const OutlineInputBorder(
+                            hintStyle: TextStyle(color: Colors.grey),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(color: mainColor),
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 189, 188, 188),
+                                width: 1.8,
+                              ),
                             ),
-                            focusedBorder: const OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide:
                                   BorderSide(color: mainColor, width: 3),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(color: mainColor),
                             ),
                           ),
                         ),
@@ -91,31 +87,29 @@ class _PostScreenState extends State<PostScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Row(
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Price",
-                            hintStyle: const TextStyle(color: mainColor),
-                            enabledBorder: const OutlineInputBorder(
+                            hintStyle: TextStyle(color: Colors.grey),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(color: mainColor),
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 189, 188, 188),
+                                width: 1.8,
+                              ),
                             ),
-                            focusedBorder: const OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide:
                                   BorderSide(color: mainColor, width: 3),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(color: mainColor),
                             ),
                           ),
                         ),
@@ -123,30 +117,29 @@ class _PostScreenState extends State<PostScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Height",
-                            hintStyle: const TextStyle(color: mainColor),
-                            enabledBorder: const OutlineInputBorder(
+                            hintStyle: TextStyle(color: Colors.grey),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(color: mainColor),
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 189, 188, 188),
+                                width: 1.8,
+                              ),
                             ),
-                            focusedBorder: const OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide:
                                   BorderSide(color: mainColor, width: 3),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(color: mainColor),
                             ),
                           ),
                         ),
@@ -154,31 +147,29 @@ class _PostScreenState extends State<PostScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: Row(
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Temperature",
-                            hintStyle: const TextStyle(color: mainColor),
-                            enabledBorder: const OutlineInputBorder(
+                            hintStyle: TextStyle(color: Colors.grey),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(color: mainColor),
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 189, 188, 188),
+                                width: 1.8,
+                              ),
                             ),
-                            focusedBorder: const OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide:
                                   BorderSide(color: mainColor, width: 3),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(color: mainColor),
                             ),
                           ),
                         ),
@@ -186,30 +177,29 @@ class _PostScreenState extends State<PostScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             hintText: "Pot",
-                            hintStyle: const TextStyle(color: mainColor),
-                            enabledBorder: const OutlineInputBorder(
+                            hintStyle: TextStyle(color: Colors.grey),
+                            enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              borderSide: BorderSide(color: mainColor),
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 189, 188, 188),
+                                width: 1.8,
+                              ),
                             ),
-                            focusedBorder: const OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               borderSide:
                                   BorderSide(color: mainColor, width: 3),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(color: mainColor),
                             ),
                           ),
                         ),
@@ -287,15 +277,11 @@ class _PostScreenState extends State<PostScreen> {
       surfaceTintColor: Colors.transparent,
       backgroundColor: lightBackground,
       foregroundColor: Colors.black,
-      centerTitle: true,
-      title: const Text('Post'),
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: const Icon(
-          Icons.keyboard_arrow_down_rounded,
-          size: 40,
+      title: const Text(
+        'Post',
+        style: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.w600,
         ),
       ),
       actions: [

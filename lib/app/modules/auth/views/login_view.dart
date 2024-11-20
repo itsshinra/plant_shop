@@ -29,7 +29,7 @@ class LoginView extends GetView<LoginController> {
                   SizedBox(
                     height: 250,
                     width: double.infinity,
-                    child: Image.asset('assets/rb_65197.png'),
+                    child: Image.asset('assets/logo.png'),
                   ),
                   const SizedBox(height: 20),
                   const Text(
@@ -67,10 +67,6 @@ class LoginView extends GetView<LoginController> {
                                     BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: mainColor, width: 3),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: mainColor),
                               ),
                               errorText:
                                   controller.emailErrorMessage.value.isEmpty
@@ -119,10 +115,6 @@ class LoginView extends GetView<LoginController> {
                                     BorderRadius.all(Radius.circular(12)),
                                 borderSide:
                                     BorderSide(color: mainColor, width: 3),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: mainColor),
                               ),
                               errorText:
                                   controller.passwordErrorMessage.value.isEmpty

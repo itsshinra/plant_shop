@@ -17,6 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _appBar(),
       backgroundColor: lightBackground,
       body: GetBuilder<ProfileController>(
         init: ProfileController(),
@@ -28,7 +29,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return SafeArea(
             child: Column(
               children: [
-                _appBar(),
                 const SizedBox(height: 50),
                 user == null && user?.profileImage == null
                     ? const CircleAvatar(
@@ -175,11 +175,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  AppBar _appBar() {
+    return AppBar(
+      backgroundColor: lightBackground,
+      title: const Text(
+        'Profile',
+        style: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            'Save',
+            style: TextStyle(color: Colors.black, fontSize: 16),
+          ),
+        ),
+      ],
+    );
+  }
+
   void _showDeleteDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.grey.shade100,
           title: const Text('Delete'),
           content: const Text('Are you sure you want to delete your account?'),
           actions: [
@@ -195,13 +218,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             GetBuilder<MainController>(
               init: MainController(),
               builder: (controller) {
-                return TextButton(
-                  onPressed: () {
-                    controller.deleteUser();
-                  },
-                  child: const Text(
-                    'Delete',
-                    style: TextStyle(color: Colors.red),
+                return Container(
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.red,
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      controller.deleteUser();
+                    },
+                    child: const Text(
+                      'Delete',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 );
               },
@@ -217,8 +247,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.grey.shade100,
           title: const Text('Logout'),
-          content: const Text('Are you sure you want to logout?'),
+          content: const Text('Are you sure you want to logout you account?'),
           actions: [
             TextButton(
               onPressed: () {
@@ -232,13 +263,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             GetBuilder<MainController>(
               init: MainController(),
               builder: (controller) {
-                return TextButton(
-                  onPressed: () {
-                    controller.logout();
-                  },
-                  child: const Text(
-                    'Logout',
-                    style: TextStyle(color: Colors.red),
+                return Container(
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.red,
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      controller.logout();
+                    },
+                    child: const Text(
+                      'Logout',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 );
               },
@@ -246,37 +284,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         );
       },
-    );
-  }
-
-  Widget _appBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            size: 20,
-          ),
-        ),
-        const Text(
-          'Profile',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: const Text(
-            'Save',
-            style: TextStyle(color: Colors.black, fontSize: 16),
-          ),
-        )
-      ],
     );
   }
 }

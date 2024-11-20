@@ -7,14 +7,11 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:plan_shop/app/constants/colors.dart';
 import 'package:plan_shop/app/data/models/category_model.dart';
-import 'package:plan_shop/app/modules/cart/views/cart_view.dart';
 import 'package:plan_shop/app/modules/main/controllers/category_controller.dart';
 import 'package:plan_shop/app/modules/main/view/category_view.dart';
 import 'package:plan_shop/app/modules/main/view/detail_view.dart';
 import 'package:plan_shop/app/modules/post/controllers/post_controller.dart';
-import 'package:plan_shop/app/modules/post/views/post_screen.dart';
-import 'package:plan_shop/app/modules/profile/controllers/profile_controller.dart';
-import 'package:plan_shop/app/modules/profile/views/profile_screen.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -46,8 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
               physics: const BouncingScrollPhysics(),
               children: [
                 const SizedBox(height: 30),
-                _searchField(),
-                const SizedBox(height: 20),
                 _bannerPromotion(),
                 const SizedBox(height: 20),
                 _category(),
@@ -58,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
-      floatingActionButton: _circleButton(),
     );
   }
 
@@ -137,16 +131,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         log('add to favorites');
                       },
                       child: Container(
-                        decoration: const BoxDecoration(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.black,
+                          color: Colors.grey.shade300,
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(5),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4),
                           child: HugeIcon(
-                            icon: HugeIcons.strokeRoundedHeartAdd,
+                            icon: HugeIcons.strokeRoundedFavourite,
                             size: 20,
-                            color: Colors.white,
+                            color: Colors.grey.shade500,
                           ),
                         ),
                       ),
@@ -189,20 +184,36 @@ class _HomeScreenState extends State<HomeScreen> {
           child: SizedBox(
             height: 50,
             child: GetBuilder<CategoryController>(
-                init: CategoryController(),
-                builder: (controller) {
-                  if (controller.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.category.category!.length,
-                    itemBuilder: (context, index) {
-                      final category = controller.category.category![index];
-                      return _categoryItem(category);
-                    },
+              init: CategoryController(),
+              builder: (controller) {
+                if (controller.isLoading) {
+                  return Skeletonizer(
+                    enabled: true,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.only(right: 8),
+                          width: 160,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        );
+                      },
+                    ),
                   );
-                }),
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.category.category!.length,
+                  itemBuilder: (context, index) {
+                    final category = controller.category.category![index];
+                    return _categoryItem(category);
+                  },
+                );
+              },
+            ),
           ),
         ),
       ],
@@ -221,14 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 160,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.topRight,
-            colors: [
-              Color.fromARGB(255, 99, 209, 89),
-              Colors.lightGreenAccent,
-            ],
-          ),
+          color: const Color.fromARGB(255, 209, 234, 192),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -236,6 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               '${category.title}',
               style: const TextStyle(
+                // color: Colors.white,
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
               ),
@@ -252,21 +257,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _bannerPromotion() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 32),
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: 160,
+      height: 150,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: lightContainer,
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color.fromARGB(255, 99, 209, 89),
-            Colors.green,
-            Colors.white,
-          ],
-        ),
+        color: const Color.fromARGB(255, 209, 234, 192),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -303,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Text(
                 'Help your plant survive \nwhen you are away.',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 17,
                   fontWeight: FontWeight.w500,
                 ),
                 maxLines: 2,
@@ -312,84 +308,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           SizedBox(
-            height: 150,
+            height: 130,
             child: Image.network(
               'https://www.frameratemerch.com/cdn/shop/products/plantpin_0002_Monstera.png?v=1658873676',
-              loadingBuilder: (context, child, progress) {
-                return progress == null
-                    ? child
-                    : const Center(child: CircularProgressIndicator());
-              },
-              errorBuilder: (context, error, stackTrace) {
-                return const Icon(Icons.error);
-              },
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _searchField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                prefixIcon: const HugeIcon(
-                  icon: HugeIcons.strokeRoundedSearch01,
-                  color: Colors.black,
-                ),
-                suffixIcon: const Icon(
-                  Icons.close,
-                  color: Colors.black,
-                ),
-                fillColor: lightContainer,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-                hintText: "Search plant",
-                hintStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Container(
-            height: 55,
-            width: 55,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: lightContainer,
-            ),
-            child: const HugeIcon(
-              icon: HugeIcons.strokeRoundedFilterHorizontal,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _circleButton() {
-    return FloatingActionButton(
-      shape: const CircleBorder(),
-      elevation: 0,
-      backgroundColor: mainColor,
-      onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const PostScreen()));
-      },
-      child: const HugeIcon(
-        icon: HugeIcons.strokeRoundedAddCircle,
-        color: Colors.white,
       ),
     );
   }
@@ -398,50 +322,42 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       backgroundColor: Colors.grey.shade200,
       surfaceTintColor: Colors.grey.shade200,
-      centerTitle: true,
-      leadingWidth: 80,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 32),
-        child: IconButton(
-            onPressed: () {
-              Get.to(() => const CartView());
-            },
-            icon: const HugeIcon(
-              icon: HugeIcons.strokeRoundedShoppingBagFavorite,
-              color: Colors.black,
-            )),
-      ),
-      title: const Text(
-        "Search Product",
-        style: TextStyle(fontWeight: FontWeight.w500),
+      title: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Welcome back',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey.shade500,
+              ),
+            ),
+            const Text(
+              "Discover",
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 26),
+            ),
+          ],
+        ),
       ),
       actions: [
-        GestureDetector(
-          onTap: () {
-            Get.to(() => const ProfileScreen());
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(right: 32.0),
-            child: GetBuilder<ProfileController>(
-              init: ProfileController(),
-              builder: (controller) {
-                if (controller.isLoading) {
-                  return const Center(
-                      child: CircularProgressIndicator(color: mainColor));
-                }
-                final user = controller.user.user;
-                return user != null && user.profileImage != null
-                    ? CircleAvatar(
-                        backgroundColor: Colors.green,
-                        backgroundImage: NetworkImage(
-                            'http://10.0.2.2:8000/profiles/${user.profileImage!}'),
-                      )
-                    : const CircleAvatar(
-                        backgroundColor: mainColor,
-                        child: Icon(Icons.person),
-                      );
-              },
+        Container(
+          height: 50,
+          margin: const EdgeInsets.only(right: 32),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              width: 3,
+              color: Colors.grey.shade400,
             ),
+          ),
+          child: const Icon(
+            HugeIcons.strokeRoundedSearch01,
+            size: 20,
+            color: Colors.black,
           ),
         ),
       ],

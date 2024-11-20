@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:plan_shop/app/data/providers/api_service.dart';
-import 'package:plan_shop/app/modules/main/view/home_view.dart';
+import 'package:plan_shop/app/modules/main/view/main_view.dart';
 
 class LoginController extends GetxController {
   var isLoading = false.obs;
@@ -29,7 +29,7 @@ class LoginController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-        Get.offAll(() => const HomeScreen());
+        Get.offAll(() => const MainView());
       }
     } catch (e) {
       isLoading.value = false;
