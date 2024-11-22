@@ -13,6 +13,8 @@ import 'package:plan_shop/app/modules/main/view/screens/detail_view.dart';
 import 'package:plan_shop/app/modules/post/controllers/post_controller.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import 'favorite_view.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -339,20 +341,21 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       actions: [
-        Container(
-          height: 50,
-          margin: const EdgeInsets.only(right: 32),
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              width: 3,
-              color: Colors.grey.shade400,
+        GestureDetector(
+          onTap: () => Get.to(() => const FavoriteView()),
+          child: Container(
+            height: 50,
+            margin: const EdgeInsets.only(right: 32),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                width: 3,
+                color: Colors.grey.shade400,
+              ),
             ),
-          ),
-          child: const Badge(
-            child: Icon(
-              HugeIcons.strokeRoundedNotification02,
+            child: const Icon(
+              HugeIcons.strokeRoundedFavourite,
               size: 20,
               color: Colors.black,
             ),
