@@ -37,7 +37,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return SafeArea(
             child: Column(
               children: [
-                const SizedBox(height: 20),
                 user == null && user?.profileImage == null
                     ? const CircleAvatar(
                         radius: 70,
@@ -139,6 +138,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  children: [
+                    Image.asset('assets/icon/21 No_BG.png', height: 80),
+                    const Text(
+                      '@Copyright by 21Greenvue',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),

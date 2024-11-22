@@ -158,24 +158,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _category() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 32),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Category',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'see all',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
+          child: Text(
+            'Category',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
         const SizedBox(height: 16),

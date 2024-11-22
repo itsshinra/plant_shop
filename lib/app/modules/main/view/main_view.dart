@@ -66,7 +66,6 @@ class _MainViewState extends State<MainView> {
                       return user != null && user.profileImage != null
                           ? CircleAvatar(
                               radius: 15,
-                              backgroundColor: Colors.green,
                               backgroundImage: NetworkImage(
                                   'http://10.0.2.2:8000/profiles/${user.profileImage!}'),
                             )
