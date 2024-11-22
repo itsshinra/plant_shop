@@ -7,12 +7,11 @@ import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:plan_shop/app/data/models/category_model.dart';
 import 'package:plan_shop/app/modules/main/controllers/category_controller.dart';
-
 import '../../../../constants/colors.dart';
 
 class CategoryView extends StatelessWidget {
-  CategoryView({super.key, this.category});
-  final Category? category;
+  const CategoryView({super.key, required this.category});
+  final Category category;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +21,9 @@ class CategoryView extends StatelessWidget {
       body: GetBuilder<CategoryController>(
         init: CategoryController(),
         builder: (controller) {
+          final categoryData = controller.categoryPlant.category!.data!
+              .firstWhere((cat) => cat.id == category.id);
+          final posts = categoryData.post ?? [];
           if (controller.isLoading) {
             return const Center(
                 child: CircularProgressIndicator(color: mainColor));
@@ -29,19 +31,11 @@ class CategoryView extends StatelessWidget {
           return MasonryGridView.count(
             shrinkWrap: true,
             crossAxisCount: 2,
-            // itemCount: controller.posts.posts?.data?.length ?? 0,
-            itemCount: 10,
+            itemCount: posts.length,
             itemBuilder: (context, index) {
-              // final plant = controller.posts.posts!.data![index];
+              final plant = posts[index];
               return GestureDetector(
-                onTap: () {
-                  // Get.to(
-                  //   () => DetailScreen(
-                  //     postId: plant.id.toString(),
-                  //     post: plant,
-                  //   ),
-                  // );
-                },
+                onTap: () {},
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   margin:
@@ -57,27 +51,25 @@ class CategoryView extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: CachedNetworkImage(
-                          // imageUrl: plant.image != null
-                          //     ? "http://10.0.2.2:8000/posts/${plant.image}"
-                          //     : 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=',
-                          imageUrl:
-                              'https://tumbleweedplants.com/cdn/shop/files/monstera-deliciosa-grow-pot-potted-plant-tumbleweed-plants-263952.png?v=1726188273',
+                          imageUrl: plant.image != null
+                              ? "http://10.0.2.2:8000/posts/${plant.image}"
+                              : 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=',
                           fit: BoxFit.contain,
                         ),
                       ),
-                      const Column(
+                      Column(
                         children: [
                           Text(
-                            'Aleo Vera',
-                            style: TextStyle(
+                            '${plant.title}',
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            'a gracefull plant',
-                            style: TextStyle(
+                            '${plant.description}',
+                            style: const TextStyle(
                               fontWeight: FontWeight.w300,
                               fontSize: 12,
                             ),
@@ -91,9 +83,9 @@ class CategoryView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            '30.00\$',
-                            style: TextStyle(
+                          Text(
+                            '${plant.price}\$',
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -141,7 +133,7 @@ class CategoryView extends StatelessWidget {
           color: Colors.black,
         ),
       ),
-      title: Text('${category!.title}'),
+      title: Text('${category.title}'),
       titleTextStyle: const TextStyle(
         fontSize: 28,
         fontWeight: FontWeight.bold,
