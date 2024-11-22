@@ -256,65 +256,71 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _bannerPromotion() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 32),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: 150,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: const Color.fromARGB(255, 209, 234, 192),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Stack(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          height: 150,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: const Color.fromARGB(255, 209, 234, 192),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                height: 35,
-                width: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: lightBackground,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.network(
-                      'https://cdn-icons-png.flaticon.com/128/2917/2917995.png',
-                      width: 25,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    height: 35,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: lightBackground,
                     ),
-                    const Text(
-                      'Plant tips',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.network(
+                          'https://cdn-icons-png.flaticon.com/128/2917/2917995.png',
+                          width: 25,
+                        ),
+                        const Text(
+                          'Plant tips',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              const Text(
-                'Help your plant survive \nwhen you are away.',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                  ),
+                  const Text(
+                    'Help your plant survive \nwhen you are away.',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ],
           ),
-          SizedBox(
-            height: 130,
-            child: Image.network(
-              'https://www.frameratemerch.com/cdn/shop/products/plantpin_0002_Monstera.png?v=1658873676',
-            ),
+        ),
+        Positioned(
+          right: -20,
+          bottom: -25,
+          child: Image.network(
+            'https://www.frameratemerch.com/cdn/shop/products/plantpin_0002_Monstera.png?v=1658873676',
+            height: 200,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
