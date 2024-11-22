@@ -24,6 +24,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/main',
       initialBinding: InternetCheckerBinding(),
+      theme: ThemeData(
+        fontFamily: 'Poppins',
+      ),
       getPages: [
         GetPage(
           name: '/login',
