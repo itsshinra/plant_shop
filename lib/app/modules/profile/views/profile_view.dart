@@ -172,6 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   AppBar _appBar() {
     return AppBar(
       backgroundColor: lightBackground,
+      surfaceTintColor: Colors.transparent,
       title: const Text(
         'Profile',
         style: TextStyle(
