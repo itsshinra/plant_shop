@@ -31,7 +31,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (profileController.isLoading) {
             return const Skeletonizer(
               enabled: true,
-              child: CircleAvatar(radius: 70),
+              child: Align(
+                  alignment: Alignment.topCenter,
+                  child: CircleAvatar(radius: 70)),
             );
           }
           final user = profileController.user.user;

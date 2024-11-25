@@ -95,16 +95,17 @@ class CategoryView extends StatelessWidget {
                               log('add to favorites');
                             },
                             child: Container(
-                              decoration: const BoxDecoration(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.black,
+                                color: Colors.grey.shade300,
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.all(5),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4),
                                 child: HugeIcon(
-                                  icon: HugeIcons.strokeRoundedHeartAdd,
+                                  icon: HugeIcons.strokeRoundedFavourite,
                                   size: 20,
-                                  color: Colors.white,
+                                  color: Colors.grey.shade500,
                                 ),
                               ),
                             ),

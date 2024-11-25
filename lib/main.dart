@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/main',
-          page: () => MainView(),
+          page: () => const MainView(),
           binding: MainBinding(),
           middlewares: [
             MainMiddleware(),
